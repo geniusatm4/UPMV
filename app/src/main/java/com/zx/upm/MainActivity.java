@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.MenuItem;
 import android.widget.TextView;
 import com.zx.upm.view.DashboardFragment;
+import com.zx.upm.view.MessageFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -22,13 +23,13 @@ public class MainActivity extends AppCompatActivity {
         public boolean onNavigationItemSelected(@NonNull MenuItem item) {
             switch (item.getItemId()) {
                 case R.id.navigation_profile:
-                    viewPager.setCurrentItem(0);
+                    viewPager.setCurrentItem(2);
                     return true;
                 case R.id.navigation_dashboard:
-                    viewPager.setCurrentItem(1);
+                    viewPager.setCurrentItem(0);
                     return true;
                 case R.id.navigation_notifications:
-                    viewPager.setCurrentItem(2);
+                    viewPager.setCurrentItem(1);
                     return true;
             }
             return false;
@@ -72,7 +73,7 @@ public class MainActivity extends AppCompatActivity {
         ViewPagerAdapter adapter = new ViewPagerAdapter(getSupportFragmentManager());
 
         adapter.addFragment(DashboardFragment.newInstance("功能集"));
-        adapter.addFragment(DashboardFragment.newInstance("信息"));
+        adapter.addFragment(new MessageFragment());
         adapter.addFragment(DashboardFragment.newInstance("我"));
         viewPager.setAdapter(adapter);
     }
