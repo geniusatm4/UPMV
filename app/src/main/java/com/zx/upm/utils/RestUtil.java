@@ -9,6 +9,8 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.URL;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class RestUtil {
 
@@ -31,6 +33,24 @@ public class RestUtil {
                 try {
                     URL url = new URL(reqURL);
                     connection = (HttpURLConnection) url.openConnection();
+
+                    // 摘要认证
+                    MessageDigest md5 = null;
+                    try {
+                        md5 = MessageDigest.getInstance("MD5");
+                    } catch(NoSuchAlgorithmException e) {
+                        e.printStackTrace();
+                    }
+
+                    // Digest password using the MD5 algorithm
+                    String password = "1234";
+                    md5.update(password.getBytes());
+                    String digestedPass = digest2HexString(md5.digest());
+
+                    // Set header "Authorization"
+                    String credentials = "testuser:" + digestedPass;
+                    connection.setRequestProperty("Authorization", "Digest " + credentials);
+
                     connection.setRequestMethod("GET");
                     connection.setConnectTimeout(8888);
                     connection.setReadTimeout(8888);
@@ -58,5 +78,20 @@ public class RestUtil {
                 }
             }
         }).start();
+    }
+
+    private static String digest2HexString(byte[] digest)
+    {
+        String digestString="";
+        int low, hi ;
+
+        for(int i=0; i < digest.length; i++)
+        {
+            low =  ( digest[i] & 0x0f ) ;
+            hi  =  ( (digest[i] & 0xf0)>>4 ) ;
+            digestString += Integer.toHexString(hi);
+            digestString += Integer.toHexString(low);
+        }
+        return digestString ;
     }
 }

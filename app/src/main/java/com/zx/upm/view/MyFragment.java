@@ -14,6 +14,10 @@ import com.zx.upm.R;
  */
 public class MyFragment extends Fragment {
 
+    public static MyFragment newInstance() {
+        MyFragment fragment = new MyFragment();
+        return fragment;
+    }
 
     public MyFragment() {
         // Required empty public constructor

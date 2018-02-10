@@ -9,6 +9,7 @@ import android.view.MenuItem;
 import android.widget.TextView;
 import com.zx.upm.view.DashboardFragment;
 import com.zx.upm.view.MessageFragment;
+import com.zx.upm.view.MyFragment;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -74,7 +75,7 @@ public class MainActivity extends AppCompatActivity {
 
         adapter.addFragment(DashboardFragment.newInstance("功能集"));
         adapter.addFragment(new MessageFragment());
-        adapter.addFragment(DashboardFragment.newInstance("我"));
+        adapter.addFragment(MyFragment.newInstance());
         viewPager.setAdapter(adapter);
     }
 
