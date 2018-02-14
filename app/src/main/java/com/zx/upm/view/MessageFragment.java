@@ -14,9 +14,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.*;
 import com.zx.upm.R;
-import com.zx.upm.face.vo.MessageSearchResult;
-import com.zx.upm.face.vo.MessageVO;
-import com.zx.upm.service.MessageService;
+import com.zx.upm.adapter.MessageVOAdapter;
+import com.zx.upm.face.service.MessageService;
+import com.zx.upm.vo.MessageSearchResult;
+import com.zx.upm.vo.MessageVO;
+
 
 import java.util.ArrayList;
 import java.util.List;
@@ -70,7 +72,7 @@ public class MessageFragment extends Fragment implements SwipeRefreshLayout.OnRe
         swipeRefreshLayout = (android.support.v4.widget.SwipeRefreshLayout) view.findViewById(R.id.swipeRefresh);
 
         MessageSearchResult result = messageService.getMessages();
-       // adapter = new ArrayAdapter<MessageVO>(getActivity(), android.R.layout.fragment_item, list);
+        // adapter = new ArrayAdapter<MessageVO>(getActivity(), android.R.layout.fragment_item, list);
         adapter = new MessageVOAdapter(getActivity(), list);
 
         //  adapter = new MessageVOAdapter(list, this);
